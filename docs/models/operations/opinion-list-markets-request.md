@@ -1,0 +1,29 @@
+# OpinionListMarketsRequest
+
+## Example Usage
+
+```typescript
+import { OpinionListMarketsRequest } from "@predexon/sdk/models/operations";
+
+let value: OpinionListMarketsRequest = {};
+```
+
+## Fields
+
+| Field                                                                             | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `status`                                                                          | [data.StatusOption](../../models/data/status-option.md)                           | :heavy_minus_sign:                                                                | Filter by status: open or closed                                                  |
+| `marketType`                                                                      | [data.MarketTypeOption](../../models/data/market-type-option.md)                  | :heavy_minus_sign:                                                                | Filter by market type: binary or categorical                                      |
+| `search`                                                                          | *string*                                                                          | :heavy_minus_sign:                                                                | Search in title (minimum 3 characters)                                            |
+| `labels`                                                                          | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by label(s)                                                                |
+| `minVolume`                                                                       | *number*                                                                          | :heavy_minus_sign:                                                                | Minimum total volume (USD)                                                        |
+| `conditionId`                                                                     | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by condition ID(s)                                                         |
+| `marketSlug`                                                                      | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by market slug(s)                                                          |
+| `marketId`                                                                        | *number*[]                                                                        | :heavy_minus_sign:                                                                | Filter by market ID(s)                                                            |
+| `predexonId`                                                                      | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by predexon ID(s)                                                          |
+| `tokenId`                                                                         | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by token ID(s)                                                             |
+| `eventId`                                                                         | *number*[]                                                                        | :heavy_minus_sign:                                                                | Filter by event/parent market ID(s)                                               |
+| `eventSlug`                                                                       | *string*[]                                                                        | :heavy_minus_sign:                                                                | Filter by event slug(s)                                                           |
+| `sort`                                                                            | [data.OpinionMarketsSortOption](../../models/data/opinion-markets-sort-option.md) | :heavy_minus_sign:                                                                | Sort by                                                                           |
+| `limit`                                                                           | *number*                                                                          | :heavy_minus_sign:                                                                | Number of markets to return                                                       |
+| `paginationKey`                                                                   | *string*                                                                          | :heavy_minus_sign:                                                                | Cursor for next page (from previous response)                                     |

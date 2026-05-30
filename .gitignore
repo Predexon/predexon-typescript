@@ -1,0 +1,34 @@
+# Build output
+/esm
+/cjs
+/dist
+/.tsbuildinfo
+/.eslintcache
+/.tshy
+/.tshy-*
+
+# Speakeasy build-artifact dirs (compiled output / generated barrels)
+/models
+/models/errors
+/types
+/lib
+/sdk
+/funcs
+/react-query
+/mcp-server
+/hooks
+/index.*
+/core.*
+/bin
+/__tests__
+
+# Dependencies
+/node_modules
+/examples/node_modules
+
+# Local env (never commit real keys)
+.env
+.env.local
+.env.*.local
+
+.DS_Store
