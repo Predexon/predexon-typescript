@@ -4,6 +4,8 @@
 
 export * from "./data-error-response.js";
 export * from "../trading/api-error.js";
+export * from "../trading-error-code.js";
+export type { Detail } from "../data-error-response.js";
 export * from "./http-client-errors.js";
 export * from "./predexon-default-error.js";
 export * from "./predexon-error.js";

@@ -157,6 +157,24 @@ run();
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
+## Import paths
+
+Everything you need is reachable from one of these four subpaths.
+
+| Subpath | Holds |
+|---------|-------|
+| `@predexon/sdk` | The `Predexon` client, `HTTPClient`, transport types |
+| `@predexon/sdk/models/errors` | All error classes (`PredexonError`, `ApiError`, `DataErrorResponse`, etc.), the `TradingErrorCode` enum, and the `Detail` type |
+| `@predexon/sdk/models` | Every schema type — markets, accounts, balances, sort/filter enums, response shapes |
+| `@predexon/sdk/models/operations` | Per-operation `Request` types (and `Response` types when an operation returns more than just the body) |
+
+```typescript
+import { Predexon } from "@predexon/sdk";
+import { ApiError, TradingErrorCode } from "@predexon/sdk/models/errors";
+import { Account, PolymarketMarket, KalshiMarketsSortOption } from "@predexon/sdk/models";
+import type { PlaceOrderAccountRequest } from "@predexon/sdk/models/operations";
+```
+
 ## Available Resources and Operations
 
 <details open>
