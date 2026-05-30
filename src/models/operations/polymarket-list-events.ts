@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
+import { remap as remap$ } from "../../lib/primitives.js";
 import * as data from "../data/index.js";
 
 export const PolymarketListEventsServerList = [
@@ -43,9 +44,9 @@ export type PolymarketListEventsRequest = {
    */
   limit?: number | undefined;
   /**
-   * Number of events to skip
+   * Cursor for the next page (from previous response's pagination.pagination_key)
    */
-  offset?: number | undefined;
+  paginationKey?: string | null | undefined;
 };
 
 /** @internal */
@@ -58,24 +59,31 @@ export type PolymarketListEventsRequest$Outbound = {
   tag?: Array<string> | null | undefined;
   sort?: string | undefined;
   limit: number;
-  offset: number;
+  pagination_key?: string | null | undefined;
 };
 
 /** @internal */
 export const PolymarketListEventsRequest$outboundSchema: z.ZodMiniType<
   PolymarketListEventsRequest$Outbound,
   PolymarketListEventsRequest
-> = z.object({
-  status: z.optional(z.nullable(data.EventStatusOption$outboundSchema)),
-  category: z.optional(z.nullable(z.string())),
-  search: z.optional(z.nullable(z.string())),
-  id: z.optional(z.nullable(z.array(z.string()))),
-  slug: z.optional(z.nullable(z.array(z.string()))),
-  tag: z.optional(z.nullable(z.array(z.string()))),
-  sort: z.optional(data.EventSortOption$outboundSchema),
-  limit: z._default(z.int(), 20),
-  offset: z._default(z.int(), 0),
-});
+> = z.pipe(
+  z.object({
+    status: z.optional(z.nullable(data.EventStatusOption$outboundSchema)),
+    category: z.optional(z.nullable(z.string())),
+    search: z.optional(z.nullable(z.string())),
+    id: z.optional(z.nullable(z.array(z.string()))),
+    slug: z.optional(z.nullable(z.array(z.string()))),
+    tag: z.optional(z.nullable(z.array(z.string()))),
+    sort: z.optional(data.EventSortOption$outboundSchema),
+    limit: z._default(z.int(), 20),
+    paginationKey: z.optional(z.nullable(z.string())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      paginationKey: "pagination_key",
+    });
+  }),
+);
 
 export function polymarketListEventsRequestToJSON(
   polymarketListEventsRequest: PolymarketListEventsRequest,

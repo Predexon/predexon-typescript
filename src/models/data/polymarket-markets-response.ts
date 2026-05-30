@@ -7,9 +7,9 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 import {
-  OffsetPagination,
-  OffsetPagination$inboundSchema,
-} from "./offset-pagination.js";
+  CursorPagination,
+  CursorPagination$inboundSchema,
+} from "./cursor-pagination.js";
 import {
   PolymarketMarket,
   PolymarketMarket$inboundSchema,
@@ -21,9 +21,9 @@ import {
 export type PolymarketMarketsResponse = {
   markets: Array<PolymarketMarket>;
   /**
-   * Offset-based pagination for markets list endpoints.
+   * Cursor-based pagination for endpoints that don't support offset.
    */
-  pagination: OffsetPagination;
+  pagination: CursorPagination;
 };
 
 /** @internal */
@@ -32,7 +32,7 @@ export const PolymarketMarketsResponse$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   markets: z.array(PolymarketMarket$inboundSchema),
-  pagination: OffsetPagination$inboundSchema,
+  pagination: CursorPagination$inboundSchema,
 });
 
 export function polymarketMarketsResponseFromJSON(

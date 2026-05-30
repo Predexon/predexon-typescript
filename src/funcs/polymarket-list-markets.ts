@@ -127,7 +127,7 @@ async function $do(
     "min_volume_1d": payload?.min_volume_1d,
     "min_volume_30d": payload?.min_volume_30d,
     "min_volume_7d": payload?.min_volume_7d,
-    "offset": payload?.offset,
+    "pagination_key": payload?.pagination_key,
     "predexon_id": payload?.predexon_id,
     "question_id": payload?.question_id,
     "search": payload?.search,

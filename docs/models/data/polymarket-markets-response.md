@@ -10,9 +10,8 @@ import { PolymarketMarketsResponse } from "@predexon/sdk/models/data";
 let value: PolymarketMarketsResponse = {
   markets: [],
   pagination: {
-    limit: 883775,
-    offset: 721952,
-    total: 373436,
+    limit: 605740,
+    count: 110130,
     hasMore: true,
   },
 };
@@ -23,4 +22,4 @@ let value: PolymarketMarketsResponse = {
 | Field                                                             | Type                                                              | Required                                                          | Description                                                       |
 | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `markets`                                                         | [data.PolymarketMarket](../../models/data/polymarket-market.md)[] | :heavy_check_mark:                                                | N/A                                                               |
-| `pagination`                                                      | [data.OffsetPagination](../../models/data/offset-pagination.md)   | :heavy_check_mark:                                                | Offset-based pagination for markets list endpoints.               |
+| `pagination`                                                      | [data.CursorPagination](../../models/data/cursor-pagination.md)   | :heavy_check_mark:                                                | Cursor-based pagination for endpoints that don't support offset.  |

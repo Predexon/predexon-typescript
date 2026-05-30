@@ -5,7 +5,7 @@
 import * as z from "zod/v4-mini";
 import * as types from "../../types/primitives.js";
 import { PredexonError } from "../errors/predexon-error.js";
-import * as models from "../index.js";
+import { TradingErrorCode, TradingErrorCode$inboundSchema } from "../trading-error-code.js";
 
 /**
  * Unified error envelope returned by every endpoint on any 4xx or 5xx response. The `error` field is a stable snake_case code partners can branch on; `message` is the human-readable explanation (free-form, may change); `requestId` is the request correlation id (also returned in the `x-request-id` response header) — quote it when contacting support.
@@ -22,7 +22,7 @@ export type ApiErrorData = {
   /**
    * Stable machine-readable error code returned in `ApiError.error`. Snake_case, never renamed once shipped. Forward-compatible — new codes may be added over time.
    */
-  error: models.TradingErrorCode;
+  error: TradingErrorCode;
 };
 
 /**
@@ -36,7 +36,7 @@ export class ApiError extends PredexonError {
   /**
    * Stable machine-readable error code returned in `ApiError.error`. Snake_case, never renamed once shipped. Forward-compatible — new codes may be added over time.
    */
-  error: models.TradingErrorCode;
+  error: TradingErrorCode;
 
   /** The original data that was passed to this error instance. */
   data$: ApiErrorData;
@@ -60,7 +60,7 @@ export const ApiError$inboundSchema: z.ZodMiniType<ApiError, unknown> = z.pipe(
   z.object({
     message: types.string(),
     requestId: types.string(),
-    error: models.TradingErrorCode$inboundSchema,
+    error: TradingErrorCode$inboundSchema,
     request$: z.custom<Request>(x => x instanceof Request),
     response$: z.custom<Response>(x => x instanceof Response),
     body$: z.string(),

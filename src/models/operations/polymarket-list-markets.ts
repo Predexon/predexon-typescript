@@ -84,10 +84,6 @@ export type PolymarketListMarketsRequest = {
    */
   limit?: number | undefined;
   /**
-   * Number of markets to skip
-   */
-  offset?: number | undefined;
-  /**
    * Minimum rolling 1-day volume (USD)
    */
   minVolume1d?: number | null | undefined;
@@ -111,6 +107,10 @@ export type PolymarketListMarketsRequest = {
    * Minimum rolling 30-day trade count
    */
   minTrades30d?: number | null | undefined;
+  /**
+   * Cursor for the next page (from previous response's pagination.pagination_key)
+   */
+  paginationKey?: string | null | undefined;
 };
 
 /** @internal */
@@ -133,13 +133,13 @@ export type PolymarketListMarketsRequest$Outbound = {
   end_after?: number | null | undefined;
   end_before?: number | null | undefined;
   limit: number;
-  offset: number;
   min_volume_1d?: number | null | undefined;
   min_volume_7d?: number | null | undefined;
   min_volume_30d?: number | null | undefined;
   min_trades_1d?: number | null | undefined;
   min_trades_7d?: number | null | undefined;
   min_trades_30d?: number | null | undefined;
+  pagination_key?: string | null | undefined;
 };
 
 /** @internal */
@@ -166,13 +166,13 @@ export const PolymarketListMarketsRequest$outboundSchema: z.ZodMiniType<
     endAfter: z.optional(z.nullable(z.int())),
     endBefore: z.optional(z.nullable(z.int())),
     limit: z._default(z.int(), 20),
-    offset: z._default(z.int(), 0),
     minVolume1d: z.optional(z.nullable(z.number())),
     minVolume7d: z.optional(z.nullable(z.number())),
     minVolume30d: z.optional(z.nullable(z.number())),
     minTrades1d: z.optional(z.nullable(z.int())),
     minTrades7d: z.optional(z.nullable(z.int())),
     minTrades30d: z.optional(z.nullable(z.int())),
+    paginationKey: z.optional(z.nullable(z.string())),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -195,6 +195,7 @@ export const PolymarketListMarketsRequest$outboundSchema: z.ZodMiniType<
       minTrades1d: "min_trades_1d",
       minTrades7d: "min_trades_7d",
       minTrades30d: "min_trades_30d",
+      paginationKey: "pagination_key",
     });
   }),
 );

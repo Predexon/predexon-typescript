@@ -4,6 +4,6 @@
 
 export * from "./data-error-response.js";
 export * from "./security.js";
+export * from "./trading-error-code.js";
 export * from "./data/index.js";
 export * from "./trading/index.js";
-export * from "./trading-error-code.js";
